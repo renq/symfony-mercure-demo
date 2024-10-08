@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Receiver</h1>
+
+    <script>
+        const eventSource = new EventSource("{{ mercure('https://lipek.net/test')|escape('js') }}");
+        eventSource.onmessage = event => {
+            // Will be called every time an update is published by the server
+            document.write(
+                JSON.parse(event.data).date + '<br>'
+            );
+        }
+    </script>
+
+    {% block page_contents %}{% endblock %}
+{% endblock %}
